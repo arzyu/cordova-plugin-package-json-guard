@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android"
-        id="cordova-plugin-package-json-guard" version="1.0.0">
+        id="cordova-plugin-package-json-guard" version="1.0.1">
   <name>Package.json Guard</name>
   <description>Fix line feed issue for package.json after cordova build, just install it.</description>
   <license>MIT</license>

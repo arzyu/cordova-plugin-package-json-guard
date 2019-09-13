@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-package-json-guard",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Fix line feed issue for package.json after cordova build, just install it.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
