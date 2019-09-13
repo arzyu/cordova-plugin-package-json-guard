@@ -11,11 +11,12 @@ export = ({ opts }: any) => {
     LINE_FEED: keyof typeof LINE_FEED;
   }
 
-  const defaultConfig: Config = opts.plugin.pluginInfo.getPreferences();
+  const { id: pluginId, pluginInfo } = opts.plugin;
+  const defaultConfig: Config = pluginInfo.getPreferences();
   const config: Config = Object.assign({}, defaultConfig, opts.cli_variables);
 
   if (!Object.keys(LINE_FEED).includes(config.LINE_FEED)) {
-    console.error(`[cordova-plugin-package-json-guard]: Invalid config: ${JSON.stringify(opts.cli_variables)}`);
+    console.error(`[${pluginId}]: Invalid config: ${JSON.stringify(opts.cli_variables)}`);
     process.exit(1);
   }
 
@@ -28,7 +29,7 @@ export = ({ opts }: any) => {
     const newContent = content.replace(/(\n|\r\n)*$/, lineFeed);
     writeFileSync(pkgPath, newContent);
   } catch (error) {
-    console.error(`[cordova-plugin-package-json-guard]: ${error.message}`);
+    console.error(`[${pluginId}]: ${error.message}`);
     process.exit(1);
   }
 };
