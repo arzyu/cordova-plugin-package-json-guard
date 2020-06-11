@@ -3,9 +3,8 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         id="cordova-plugin-package-json-guard" version="1.0.1">
   <name>Package.json Guard</name>
-  <description>Fix line feed issue for package.json after cordova build, just install it.</description>
+  <description>Fix line feed issue (cordova-cli/issues/394) for package.json after cordova build, just install it.</description>
   <license>MIT</license>
-  <preference name="LINE_FEED" default="LF" />
   <hook src="dist/index.js" type="after_prepare" />
   <hook src="dist/index.js" type="after_platform_add" />
   <hook src="dist/index.js" type="after_plugin_add" />

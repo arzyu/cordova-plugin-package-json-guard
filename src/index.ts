@@ -7,29 +7,21 @@ export = ({ opts }: any) => {
     CRLF = "\r\n"
   }
 
-  type Config = {
-    LINE_FEED: keyof typeof LINE_FEED;
-  }
-
-  const { id: pluginId, pluginInfo } = opts.plugin;
-  const defaultConfig: Config = pluginInfo.getPreferences();
-  const config: Config = Object.assign({}, defaultConfig, opts.cli_variables);
-
-  if (!Object.keys(LINE_FEED).includes(config.LINE_FEED)) {
-    console.error(`[${pluginId}]: Invalid config: ${JSON.stringify(opts.cli_variables)}`);
-    process.exit(1);
-  }
-
-  const lineFeed = LINE_FEED[config.LINE_FEED];
-
-  const pkgPath = resolve(process.cwd(), "package.json");
+  let lineFeed = LINE_FEED.LF;
 
   try {
+    const pkgPath = resolve(process.cwd(), "package.json");
     const content = readFileSync(pkgPath, { encoding: "utf8" });
+    const eolIndex = content.indexOf("\n");
+
+    if (content[eolIndex - 1] === "\r") {
+      lineFeed = LINE_FEED.CRLF;
+    }
+
     const newContent = content.replace(/(\n|\r\n)*$/, lineFeed);
     writeFileSync(pkgPath, newContent);
   } catch (error) {
-    console.error(`[${pluginId}]: ${error.message}`);
+    console.error(`[${opts.plugin.id}]: ${error.message}`);
     process.exit(1);
   }
 };
